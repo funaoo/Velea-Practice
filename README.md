@@ -11,7 +11,7 @@ Includes duels, FFA, events, rank system, scoreboard, bots, and more.
 |-------------|---------|
 | PocketMine-MP | 5.44.3 |
 | PHP | 8.2+ |
-| API | 5.41.0 |
+| API | 5.44.3 |
 
 ---
 
