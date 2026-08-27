@@ -1,0 +1,112 @@
+name: ValeaPracticeCore
+version: 0.1
+api: 5.41.0
+main: Nathan45\Valea\Loader
+author: Nathan45 (Update by Funaoo, Discord; https://discord.gg/Xs4YjGy2zr)
+
+permissions:
+  valea.command.autosprint:
+    description: Allows use of /autosprint
+    default: true
+  valea.command.info:
+    description: Allows use of /info
+    default: true
+  valea.command.inventory:
+    description: Allows use of /inventory
+    default: true
+  valea.command.online:
+    description: Allows use of /online
+    default: true
+  valea.command.ping:
+    description: Allows use of /ping
+    default: true
+  valea.command.profile:
+    description: Allows use of /profile
+    default: true
+  valea.command.rekit:
+    description: Allows use of /rekit
+    default: true
+  valea.command.report:
+    description: Allows use of /report
+    default: true
+  valea.command.rules:
+    description: Allows use of /rules
+    default: true
+  valea.command.spawn:
+    description: Allows use of /spawn
+    default: true
+  valea.command.event:
+    description: Allows use of /event
+    default: true
+  valea.rank.edit:
+    description: Allows use of /editrank
+    default: op
+  valea.build:
+    description: Allows use of /buildperms
+    default: op
+  valea.vanish:
+    description: Allows use of /vanish
+    default: op
+  valea.staff.ban:
+    description: Allows use of /ban
+    default: op
+  valea.staff.bot:
+    description: Allows use of /bot
+    default: op
+  valea.staff.clearskin:
+    description: Allows use of /clearskin
+    default: op
+  valea.staff.fly:
+    description: Allows use of /fly
+    default: op
+  valea.staff.freeze:
+    description: Allows use of /freeze
+    default: op
+  valea.staff.me:
+    description: Allows use of /me
+    default: op
+  valea.staff.mute:
+    description: Allows use of /mute
+    default: op
+  valea.staff.rank:
+    description: Allows use of /rank
+    default: op
+  valea.staff.unban:
+    description: Allows use of /unban
+    default: op
+  valea.staff.who:
+    description: Allows use of /who
+    default: op
+  valea.ban:
+    description: Permission to ban players
+    default: op
+  valea.unban:
+    description: Permission to unban players
+    default: op
+  valea.freeze:
+    description: Permission to freeze players
+    default: op
+  valea.mute:
+    description: Permission to mute players
+    default: op
+  valea.who:
+    description: Permission to use /who
+    default: op
+  valea.fly:
+    description: Permission to fly
+    default: op
+  valea.rank:
+    description: Permission to set ranks
+    default: op
+  valea.me:
+    description: Permission to use /me
+    default: op
+  valea.clear.skin:
+    description: Permission to clear skins
+    default: op
+  rank.v:
+    description: Valea+ rank permission
+    default: op
+  rank.manager:
+    description: Manager rank permission
+    default: op
