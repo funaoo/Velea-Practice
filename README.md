@@ -1,6 +1,6 @@
 # ValeaPracticeCore
 
-A practice core plugin for **PocketMine-MP 5.41.0** (API 5.41.0 · Protocol 924).  
+A practice core plugin for **PocketMine-MP 5.44.3** (API 5.44.3 · Protocol 924).  
 Includes duels, FFA, events, rank system, scoreboard, bots, and more.
 
 ---
@@ -9,7 +9,7 @@ Includes duels, FFA, events, rank system, scoreboard, bots, and more.
 
 | Requirement | Version |
 |-------------|---------|
-| PocketMine-MP | 5.41.0 |
+| PocketMine-MP | 5.44.3 |
 | PHP | 8.2+ |
 | API | 5.41.0 |
 
@@ -249,5 +249,5 @@ You can add more in PNG format (64x32 px).
 ## Credits
 
 - **Nathan45** - Original development
-- **Funaoo** - Updated to PocketMine-MP 5.41.0
+- **Funaoo** - Updated to PocketMine-MP 5.44.3
 - Discord: https://discord.gg/Xs4YjGy2zr
