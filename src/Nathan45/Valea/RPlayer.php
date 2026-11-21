@@ -20,6 +20,7 @@ use pocketmine\entity\Attribute;
 use pocketmine\entity\effect\EffectInstance;
 use pocketmine\entity\effect\VanillaEffects;
 use pocketmine\entity\Entity;
+use pocketmine\item\EnderPearl;
 use pocketmine\item\Item;
 use pocketmine\nbt\LittleEndianNbtSerializer;
 use pocketmine\nbt\TreeRoot;
@@ -100,8 +101,9 @@ class RPlayer extends Player implements ICache
     public function resetItemCooldown(Item $item, ?int $ticks = null): void
     {
         if (!is_numeric($ticks)) $ticks = $item->getCooldownTicks();
-        if ($ticks > 0) {
-            $this->cache->pearls[$this->getName()] = time() + ($ticks / 20);
+        if ($item instanceof EnderPearl) {
+            $ticks = IUtils::PEARL_COOLDOWN * 20;
+            $this->cache->pearls[$this->getName()] = time() + IUtils::PEARL_COOLDOWN;
         }
         parent::resetItemCooldown($item, $ticks);
     }
@@ -563,9 +565,8 @@ class RPlayer extends Player implements ICache
 
     public function getPearlCooldown(): int|string
     {
-        return ((!isset($this->cache->pearls[$this->getName()])) || $this->cache->pearls[$this->getName()] - time() <= 0)
-            ? "§aAvailable"
-            : $this->cache->pearls[$this->getName()] - time();
+        $remaining = ($this->cache->pearls[$this->getName()] ?? 0) - time();
+        return $remaining <= 0 ? "§aAvailable" : (int) $remaining;
     }
 
     public function getFighter(): ?Player
