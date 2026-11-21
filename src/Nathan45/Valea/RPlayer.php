@@ -306,14 +306,14 @@ class RPlayer extends Player implements ICache
 
     public function setInCombat(RPlayer $fighter, int $time = 15): void
     {
+        $wasInCombat = $this->isOnCombat();
         $this->cache->combats[$this->getName()][0] = time() + $time;
         $this->cache->combats[$this->getName()][1] = $fighter->getName();
         $this->getScoreboard();
         if (isset($this->cache->scoreboards[$this->getName()])) {
             $this->cache->scoreboards[$this->getName()]->setTarget($fighter);
         }
-        if (!$this->isOnCombat()) $this->sendMessage(IUtils::PREFIX . "§aYou are now in combat with " . $fighter->getName());
-        if (!$fighter->isOnCombat()) $fighter->sendMessage(IUtils::PREFIX . "§aYou are now in combat with " . $this->getName());
+        if (!$wasInCombat) $this->sendMessage(IUtils::PREFIX . "§aYou are now in combat with " . $fighter->getName());
     }
 
     public function setFreeze(int $time, RPlayer|null $staff = null): void
