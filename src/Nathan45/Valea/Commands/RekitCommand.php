@@ -24,8 +24,8 @@ class RekitCommand extends Command
             return;
         }
 
-        if ($sender->isOnCombat() === 0) {
-            $sender->sendMessage(IUtils::PREFIX . "§aYou can not use this command in combat!");
+        if ($sender->isOnCombat()) {
+            $sender->sendMessage(IUtils::PREFIX . "§cYou can not use this command in combat!");
             return;
         }
 
