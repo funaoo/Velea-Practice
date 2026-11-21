@@ -138,7 +138,7 @@ class PlayerListener implements Listener, IUtils
         }
 
         $player->reKit("Lobby");
-        $this->plugin->getServer()->dispatchCommand($player, "spawn");
+        $this->plugin->getServer()->dispatchCommand($player, "spawn", true);
 
         if ($player->getAllowedScoreboard()) {
             Cache::getInstance()->scoreboards[$player->getName()] = new Scoreboard($player, Scoreboard::SCOREBOARD_LOBBY);
@@ -399,7 +399,7 @@ class PlayerListener implements Listener, IUtils
         }
 
         
-        Loader::getInstance()->getServer()->dispatchCommand($player, "spawn");
+        Loader::getInstance()->getServer()->dispatchCommand($player, "spawn", true);
         $player->setNameTag($player->getRank()->toString() . $player->getName());
     }
 
@@ -412,11 +412,14 @@ class PlayerListener implements Listener, IUtils
         if (!$player instanceof RPlayer) return;
 
         $player->addDeath();
+        $player->removeCombat();
         $cause = $player->getLastDamageCause();
         $event->setDrops([]);
 
         if ($cause instanceof EntityDamageByEntityEvent) {
             $killer = $cause->getDamager();
+
+            if ($killer instanceof RPlayer) $killer->removeCombat();
 
             if ($killer instanceof Player) {
                 $deathmsg = [
@@ -436,7 +439,7 @@ class PlayerListener implements Listener, IUtils
                     }
                 }
 
-                Loader::getInstance()->getServer()->dispatchCommand($killer, "rekit");
+                Loader::getInstance()->getServer()->dispatchCommand($killer, "rekit", true);
             }
 
             if (!$killer instanceof RPlayer || !$player instanceof RPlayer) {
@@ -556,6 +559,14 @@ class PlayerListener implements Listener, IUtils
     {
         $player = $event->getPlayer();
         if (!$player instanceof RPlayer) return;
+
+        if ($player->isOnCombat()) {
+            $fighter = $player->getFighter();
+            $this->plugin->getServer()->broadcastMessage(IUtils::PREFIX . "§c" . $player->getName() . " §7left during combat and was killed!");
+            $player->kill();
+            if ($fighter instanceof RPlayer) $fighter->removeCombat();
+        }
+        $player->removeCombat();
 
         $player->removeClickData();
         $player->removeQueue();
