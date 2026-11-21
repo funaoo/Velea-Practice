@@ -2,6 +2,7 @@
 
 namespace Nathan45\Valea\Items;
 
+use Nathan45\Valea\Utils\Interfaces\IUtils;
 use pocketmine\item\EnderPearl;
 use pocketmine\item\ItemIdentifier;
 use pocketmine\item\ItemTypeIds;
@@ -20,6 +21,6 @@ class ValeaPearl extends EnderPearl
 
     public function getCooldownTicks(): int
     {
-        return 20 * 15;
+        return 20 * IUtils::PEARL_COOLDOWN;
     }
 }
