@@ -3,7 +3,6 @@
 namespace Nathan45\Valea\Listener;
 
 use Nathan45\Valea\Entities\Bots\Bot;
-use Nathan45\Valea\Items\ValeaPearl;
 use Nathan45\Valea\Listener\PracticeEvents\BoxingTapEvent;
 use Nathan45\Valea\Loader;
 use Nathan45\Valea\RPlayer;
@@ -14,6 +13,7 @@ use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\entity\EntityItemPickupEvent;
 use pocketmine\event\entity\ProjectileLaunchEvent;
+use pocketmine\entity\projectile\EnderPearl;
 use pocketmine\event\Listener;
 
 class EntityListener implements Listener
@@ -33,16 +33,16 @@ class EntityListener implements Listener
 
         if ($entity->getWorld()->getFolderName() === IUtils::LOBBY_WORLD_NAME) {
             $event->cancel();
+            return;
         }
 
         if (!$player instanceof RPlayer) return;
 
-        if ($entity instanceof ValeaPearl) {
-            if (isset($cache->pearls[$player->getName()]) && $cache->pearls[$player->getName()] > time()) {
+        if ($entity instanceof EnderPearl) {
+            $remaining = ($cache->pearls[$player->getName()] ?? 0) - time();
+            if ($remaining > 0) {
                 $event->cancel();
-                $player->sendPopup(str_replace(["{time}"], [$cache->pearls[$player->getName()] - time()], IMessages::PEARL_COOLDOWN));
-            } else {
-                $cache->pearls[$player->getName()] = time() + IUtils::PEARL_COOLDOWN;
+                $player->sendPopup(str_replace(["{time}"], [$remaining], IMessages::PEARL_COOLDOWN));
             }
         }
     }
