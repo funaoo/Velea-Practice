@@ -51,7 +51,7 @@ class PracticeListener implements Listener, IUtils
 
         foreach ($killers as $killer) {
             if (!$killer instanceof RPlayer) continue;
-            $this->plugin->getServer()->dispatchCommand($killer, "spawn");
+            $this->plugin->getServer()->dispatchCommand($killer, "spawn", true);
             if ($killer->getAllowedScoreboard()) {
                 $this->cache->scoreboards[$killer->getName()] = new Scoreboard($killer, Scoreboard::SCOREBOARD_LOBBY);
             }
@@ -173,7 +173,7 @@ class PracticeListener implements Listener, IUtils
         $this->plugin->getServer()->getAsyncPool()->submitTask(
             new DeleteWorld($this->plugin->getServer()->getDataPath() . "worlds/" . $world->getFolderName(), $world)
         );
-        $this->plugin->getServer()->dispatchCommand($player, "spawn");
+        $this->plugin->getServer()->dispatchCommand($player, "spawn", true);
     }
 
     public function onDeathInEvent(PlayerDeathInEventEvent $event): void
