@@ -1,7 +1,10 @@
 # ValeaPracticeCore
 
-A practice core plugin for **PocketMine-MP 5.44.3** (API 5.44.3 · Protocol 924).  
-Includes duels, FFA, events, rank system, scoreboard, bots, and more.
+A practice core plugin built and tested entirely on **[AmberPM](https://github.com/Amber-PM)**, the high-performance multi-version fork of PocketMine-MP (API 5.44.2 compatible).  
+Includes duels, FFA, events, rank system, scoreboard, bots, combat tag, and more.
+
+> **Everything in this project runs on Amber.** Amber is a PocketMine-MP 5.x fork that supports Bedrock clients from v1.20.0 (protocol 589) up to v1.26.50 (protocol 2193) on the same server, so players on different versions can join the same practice server.  
+> Amber organization: https://github.com/Amber-PM
 
 ---
 
@@ -9,17 +12,19 @@ Includes duels, FFA, events, rank system, scoreboard, bots, and more.
 
 | Requirement | Version |
 |-------------|---------|
-| PocketMine-MP | 5.44.3 |
-| PHP | 8.2+ |
-| API | 5.44.3 |
+| Server software | [AmberPM](https://github.com/Amber-PM/Amber) (PocketMine-MP 5.x fork) |
+| PHP | 8.2+ (Amber itself requires 8.1+) |
+| API | 5.44.2 (Amber's compatible API version) |
+| Client protocols | 589 – 2193 (handled by Amber) |
 
 ---
 
 ## Installation
 
-1. Download the plugin and place the `Valea - PracticeCore` folder inside `/plugins/`.
-2. Edit the values in `src/Nathan45/Valea/Utils/Interfaces/IUtils.php` to match your server.
-3. Restart the server.
+1. Download and set up [AmberPM](https://github.com/Amber-PM/Amber) as your server software.
+2. Place the `Valea - PracticeCore` folder inside `/plugins/`.
+3. Edit the values in `src/Nathan45/Valea/Utils/Interfaces/IUtils.php` to match your server.
+4. Restart the server.
 
 ---
 
@@ -62,6 +67,17 @@ const KB_Z = 0.4;
 const BOXING_HIT_TO_WIN = 100;         // Hits required to win in Boxing
 const TB_ROUND_FOR_WIN  = 5;           // Rounds required to win Tiebreak
 ```
+
+---
+
+## Combat Tag
+
+Hitting or being hit by another player puts both in combat for 15 seconds.
+
+- Commands (including `/spawn` and `/rekit`) are blocked while in combat, except for players with `pocketmine.command.op`.
+- You can only fight the player you are tagged with; hits from or to a third player are cancelled.
+- Leaving the server while in combat kills the player (combat logging) and the event is broadcast.
+- Combat is cleared on any death. Plugin-issued `/spawn` and `/rekit` dispatches (void fall, post-kill rekit) are internal and never blocked by the combat tag.
 
 ---
 
@@ -160,7 +176,7 @@ Ranks are assigned with `/rank <player> <rank>`.
 | `/rules` | View server rules |
 | `/report <player>` | Report a player |
 | `/inventory <player>` | View another player's inventory |
-| `/rekit` | Re-equip your current kit |
+| `/rekit` | Re-equip your current kit (not usable in combat) |
 | `/event` | Join the active event |
 
 ### Staff
@@ -249,5 +265,6 @@ You can add more in PNG format (64x32 px).
 ## Credits
 
 - **Nathan45** - Original development
-- **Funaoo** - Updated to PocketMine-MP 5.44.3
+- **Funaoo** - Updated and maintained on AmberPM
+- **[AmberPM](https://github.com/Amber-PM)** - Server software this project runs on
 - Discord: https://discord.gg/Xs4YjGy2zr
