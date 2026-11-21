@@ -245,7 +245,7 @@ class Event
     public function hasEliminated(RPlayer $player, RPlayer $killer): void
     {
         unset($this->players[array_search($player, $this->players, true)]);
-        $this->plugin->getServer()->dispatchCommand($player, "spawn");
+        $this->plugin->getServer()->dispatchCommand($player, "spawn", true);
     }
 
     public function winRound(RPlayer $player): void
