@@ -43,8 +43,9 @@ class Scoreboard implements IUtils
             3 => TE::GREEN . " Your Ping: " . TE::WHITE . "{ping}",
             4 => TE::GOLD . " Their Ping: " . TE::WHITE . "{a_ping}",
             5 => TE::RED . " Combat: " . TE::WHITE . "{combat}",
-            6 => "§r",
-            7 => TE::WHITE . "§r",
+            6 => TE::LIGHT_PURPLE . " Pearl: " . TE::WHITE . "{pearl}",
+            7 => "§r",
+            8 => TE::WHITE . "§r",
         ],
 
         self::SCOREBOARD_DUEL => [
@@ -53,8 +54,9 @@ class Scoreboard implements IUtils
             3 => TE::GREEN . " Your Ping: " . TE::WHITE . "{ping}",
             4 => TE::GOLD . " Their Ping: " . TE::WHITE . "{a_ping}",
             5 => TE::RED . " Combat: " . TE::WHITE . "{combat}",
-            6 => "§r",
-            7 => TE::WHITE . "§r",
+            6 => TE::LIGHT_PURPLE . " Pearl: " . TE::WHITE . "{pearl}",
+            7 => "§r",
+            8 => TE::WHITE . "§r",
         ],
 
         self::SCOREBOARD_BOXING => [
@@ -155,7 +157,7 @@ class Scoreboard implements IUtils
                 ($this->target === null || !$this->target->isConnected()) ? " " : $this->target->getNetworkSession()->getPing(),
                 $player->getHit(),
                 ($this->target === null) ? 0 : $this->target->getHit(),
-                ($player->getCombatTime() === 0) ? " " : $player->getCombatTime(),
+                ($player->getCombatTime() === 0) ? "§aNo" : "§c" . $player->getCombatTime(),
                 $player->getPearlCooldown(),
                 ($this->event === null) ? " " : $this->event->getHoster()->getName(),
                 ($this->event === null) ? " " : $this->event->getRound(),
