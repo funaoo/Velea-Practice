@@ -81,13 +81,13 @@ class EntityListener implements Listener
                 default                      => $event->setAttackCooldown(10),
             };
 
-            if ($entity->isOnCombat() && $entity->getFighter() !== $damager) {
+            if ($entity->isOnCombat() && $entity->getFighter() !== null && $entity->getFighter() !== $damager) {
                 $event->cancel();
                 $damager->sendMessage(str_replace(["{player}", "{seconds}"], [$entity->getName(), $entity->getCombatTime()], IMessages::PLAYER_IN_COMBAT));
                 return;
             }
 
-            if ($damager->isOnCombat() && $damager->getFighter() !== $entity) {
+            if ($damager->isOnCombat() && $damager->getFighter() !== null && $damager->getFighter() !== $entity) {
                 $event->cancel();
                 $damager->sendMessage(str_replace(["{seconds}"], [$damager->getCombatTime()], IMessages::IN_COMBAT));
                 return;
@@ -117,7 +117,7 @@ class EntityListener implements Listener
         match ($event->getCause()) {
             EntityDamageEvent::CAUSE_VOID => (function () use ($event, $player) {
                 $event->cancel();
-                Loader::getInstance()->getServer()->dispatchCommand($player, "spawn");
+                Loader::getInstance()->getServer()->dispatchCommand($player, "spawn", true);
             })(),
             EntityDamageEvent::CAUSE_FALL => $event->cancel(),
             default                       => null,
